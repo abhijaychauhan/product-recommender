@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { api } from '../api';
 
 export default function AnalyticsPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/analytics')
+    api.get('/analytics')
       .then(res => {
         setData(res.data);
         setLoading(false);

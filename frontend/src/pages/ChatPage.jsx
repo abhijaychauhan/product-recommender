@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { api } from '../api';
+import axios from 'axios';
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([]);
@@ -22,7 +22,7 @@ export default function ChatPage() {
     setLoading(true);
 
     try {
-      const res = await api.post('/chat', { message: userMessage });
+  const res = await axios.post('http://127.0.0.1:8000/chat', { message: userMessage });
       
       setMessages(prev => [...prev, {
         role: 'assistant',

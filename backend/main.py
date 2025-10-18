@@ -23,7 +23,6 @@ from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
-DISABLE_CV = os.getenv("DISABLE_CV", "0") == "1"
 
 # Import CV module
 try:
@@ -95,10 +94,8 @@ def load_models():
             print(f"⚠️  Using CSV data: {len(products_df)} items")
         
         # Load CLIP model for Computer Vision (optional)
-        if CV_AVAILABLE and not DISABLE_CV:
+        if CV_AVAILABLE:
             load_clip_model()
-        elif DISABLE_CV:
-            print("⚠️ Skipping CLIP model load (DISABLE_CV=1)")
         
         print("✅ All models loaded successfully!")
         
@@ -470,5 +467,4 @@ def get_product(product_id: str):
 
 if __name__ == '__main__':
     import uvicorn
-    port = int(os.getenv("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
